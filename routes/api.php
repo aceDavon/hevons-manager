@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
+use App\Http\Controllers\Api\V1\TaskPriorityController;
 use App\Http\Controllers\Api\V1\TasksController;
+use App\Http\Controllers\Api\V1\TaskStatusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +27,8 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::resource('tasks', TasksController::class);
+    Route::resource('task_priority', TaskPriorityController::class);
+    Route::resource('task_status', TaskStatusController::class);
     Route::delete('logout', [AuthController::class, 'logout']);
 });
 
