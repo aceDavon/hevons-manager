@@ -14,6 +14,22 @@ class TaskStatusResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            "id" => $this->id,
+            "data" => [
+                "title" => $this->title,
+                "color" => $this->color
+            ],
+            "relationships" => $this->when(
+                $this->relationLoaded('task') && $this->task,
+                [
+                    "task" => [
+                        "id" => $this->task->id ?? null,
+                        "title" => $this->task->title ?? null,
+                        "assignee" => $this->task->user->first_name ?? null
+                    ]
+                ]
+            )
+        ];
     }
 }

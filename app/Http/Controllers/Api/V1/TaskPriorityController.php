@@ -18,9 +18,9 @@ class TaskPriorityController extends Controller
      */
     public function index()
     {
-        return TaskPriorityResource::collection([
+        return TaskPriorityResource::collection(
             Priority::all()
-        ]);
+        );
     }
 
     /**
